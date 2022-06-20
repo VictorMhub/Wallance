@@ -4,9 +4,9 @@ const Forms = () => {
     const [formsValues, setFormsValues ] = useState({
         id: 0,
         quantity: '',
-        currency: '',
-        method: '',
-        tag: '',
+        currency: 'BRL',
+        method: 'Money',
+        tag: 'Food',
         description: '',
     })
     const { expensives, setExpensives } = useContext(MyContext)
@@ -25,9 +25,9 @@ const Forms = () => {
         setFormsValues({
            id: formsValues.id += 1,
            quantity: '',
-           currency: '',
-           method: '',
-           tag: '',
+           currency: 'BRL',
+           method: 'Money',
+           tag: 'Food',
            description: '',    
         })
     }
