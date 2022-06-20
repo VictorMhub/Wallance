@@ -6,9 +6,13 @@ const Provider = ({ children }) => {
         userName: '',
         password: '',
     })
+    const [expensives, setExpensives] = useState([])
+    
     const context = {
         login,
         setLogin,
+        expensives,
+        setExpensives,
     }
     return(
         <MyContext.Provider value={ context }>
