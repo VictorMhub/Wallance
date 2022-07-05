@@ -1,14 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import currencyTags from "../Services/wallanceApi";
 import MyContext from "../Context/Context";
 const Forms = () => {
     const [formsValues, setFormsValues ] = useState({
         id: 0,
         quantity: '',
-        currency: 'BRL',
+        currency: 'USD',
         method: 'Money',
         tag: 'Food',
         description: '',
     })
+    const [tags, setTags] = useState([])
     const { expensives, setExpensives } = useContext(MyContext)
     
     const handleInputChange = ({ target }) => {
@@ -25,12 +27,20 @@ const Forms = () => {
         setFormsValues({
            id: formsValues.id += 1,
            quantity: '',
-           currency: 'BRL',
+           currency: 'USD',
            method: 'Money',
            tag: 'Food',
            description: '',    
         })
     }
+    useEffect(() => {
+      const fetchTags = async () => {
+        const tags = await currencyTags();
+        setTags(tags)
+      }
+      fetchTags();
+    }, [])
+
     return (
        <div> 
          <section>
@@ -47,7 +57,7 @@ const Forms = () => {
                 <label htmlFor="currency">
                     Currency:
                     <select id="currency" name="currency" onChange={ handleInputChange }>
-                        <option>BRL</option>
+                        {tags.map((tag, index) =>  <option key={index}>{tag}</option> )}
                     </select>
                 </label>
                 <label htmlFor="method">
